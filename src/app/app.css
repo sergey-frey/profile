@@ -1,24 +1,24 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-	--code-bg: #1e1e1e;
-	--keyword-color: #569cd6;
-	--text-color: #dcdcdc;
-	--string-color: #d69d85;
-	--attr-color: #9cdcfe;
-	--number-color: #b8d7a3;
+  --code-bg: #1e1e1e;
+  --keyword-color: #569cd6;
+  --text-color: #dcdcdc;
+  --string-color: #d69d85;
+  --attr-color: #9cdcfe;
+  --number-color: #b8d7a3;
 }
 
 body,
 html,
 #root {
-	min-height: 100vh;
+  min-height: 100dvh;
 }
 
 body {
-	display: grid;
+  display: grid;
 }

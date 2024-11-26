@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from "svelte/transition";
 	import CodeKeyword from "../components/code-keyword.svelte";
 	import CodeRow from "../components/code-row.svelte";
 	import KeyValue from "../components/key-value.svelte";
@@ -38,7 +39,7 @@
 </script>
 
 <main class="main">
-	<section class="code">
+	<section class="code" transition:fly={{ y: 100, duration: 1200 }}>
 		<CodeRow tabs={0} {tabSize} number={1}>
 			<CodeKeyword>const</CodeKeyword>
 			Person = {"{"}
