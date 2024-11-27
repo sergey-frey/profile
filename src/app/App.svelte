@@ -39,7 +39,7 @@
 </script>
 
 <main class="main">
-	<section class="code" transition:fly={{ y: 100, duration: 1200 }}>
+	<section class="code" in:fly={{ y: 100, duration: 1200 }}>
 		<CodeRow tabs={0} {tabSize} number={1}>
 			<CodeKeyword>const</CodeKeyword>
 			Person = {"{"}
