@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env MODE=development vite",
-    "build": "cross-env MODE=production vite build",
-    "preview": "vite preview",
+    "build:prod": "cross-env MODE=production vite build",
+    "preview:prod": "cross-env MODE=production vite preview",
+    "preview": "npm run build:prod && npm run preview:prod",
     "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
   },
   "devDependencies": {

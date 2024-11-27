@@ -4,6 +4,7 @@
 	import CodeRow from "../components/code-row.svelte";
 	import KeyValue from "../components/key-value.svelte";
 	import type { FieldType } from "../shared/types/field";
+	import Transition from "../shared/ui/transition.svelte";
 	import { keys } from "../shared/utils/keys";
 
 	import "@fontsource/b612-mono";
@@ -39,22 +40,24 @@
 </script>
 
 <main class="main">
-	<section class="code" in:fly={{ y: 100, duration: 1200 }}>
-		<CodeRow tabs={0} {tabSize} number={1}>
-			<CodeKeyword>const</CodeKeyword>
-			Person = {"{"}
-		</CodeRow>
-
-		{#each objectKeys as key, index}
-			<CodeRow tabs={1} {tabSize} number={index + 2}>
-				<KeyValue {key} valueObject={object[key] as FieldType} />
+	<Transition transition={(node) => fly(node, { y: 200, duration: 1200 })}>
+		<section class="code">
+			<CodeRow tabs={0} {tabSize} number={1}>
+				<CodeKeyword>const</CodeKeyword>
+				Person = {"{"}
 			</CodeRow>
-		{/each}
 
-		<CodeRow tabs={0} {tabSize} number={objectKeys.length + 2}>
-			{"}"}
-		</CodeRow>
-	</section>
+			{#each objectKeys as key, index}
+				<CodeRow tabs={1} {tabSize} number={index + 2}>
+					<KeyValue {key} valueObject={object[key] as FieldType} />
+				</CodeRow>
+			{/each}
+
+			<CodeRow tabs={0} {tabSize} number={objectKeys.length + 2}>
+				{"}"}
+			</CodeRow>
+		</section>
+	</Transition>
 </main>
 
 <style lang="scss">
