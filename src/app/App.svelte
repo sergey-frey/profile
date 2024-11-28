@@ -1,104 +1,155 @@
 <script lang="ts">
-	import { fly } from "svelte/transition";
-	import CodeKeyword from "../components/code-keyword.svelte";
-	import CodeRow from "../components/code-row.svelte";
-	import KeyValue from "../components/key-value.svelte";
-	import type { FieldType } from "../shared/types/field";
-	import Transition from "../shared/ui/transition.svelte";
-	import { keys } from "../shared/utils/keys";
+  import { fly } from "svelte/transition";
+  import CodeKeyword from "../components/code-keyword.svelte";
+  import CodeRow from "../components/code-row.svelte";
+  import KeyValue from "../components/key-value.svelte";
+  import PropertyValueViewer from "../components/property-value-viewer.svelte";
+  import { personObject } from "../shared/constants/person-object";
+  import { skillsObject } from "../shared/constants/skills-object";
+  import type { FieldType } from "../shared/types/field";
+  import Transition from "../shared/ui/transition.svelte";
+  import { keys } from "../shared/utils/keys";
+  import { onMount } from "svelte";
 
-	import "@fontsource/b612-mono";
+  let tabSize = $state(50);
 
-	const tabSize = 50;
+  const personObjectKeys = keys(personObject);
+  const skillsObjectKeys = keys(skillsObject);
 
-	const object = {
-		firstName: {
-			type: "string",
-			value: "Sergey",
-		},
-		lastName: {
-			type: "string",
-			value: "Frey",
-		},
-		experienceYears: {
-			type: "number",
-			value: 3,
-		},
-		github: {
-			type: "link",
-			value: "sergey-frey",
-			href: "https://github.com/sergey-frey",
-		},
-		telegram: {
-			type: "link",
-			value: "@sergeyfrey",
-			href: "https://t.me/sergeyfrey",
-		},
-	};
+  onMount(() => {
+    const isSmallScreen = window.matchMedia("(max-width: 500px)").matches;
 
-	const objectKeys = keys(object);
+    if (isSmallScreen) {
+      tabSize = 20;
+    }
+  });
 </script>
 
 <main class="main">
-	<Transition transition={(node) => fly(node, { y: 200, duration: 1200 })}>
-		<section class="code">
-			<CodeRow tabs={0} {tabSize} number={1}>
-				<CodeKeyword>const</CodeKeyword>
-				Person = {"{"}
-			</CodeRow>
+  <section class="container">
+    <h1 class="title">/// Sergey Frey</h1>
 
-			{#each objectKeys as key, index}
-				<CodeRow tabs={1} {tabSize} number={index + 2}>
-					<KeyValue {key} valueObject={object[key] as FieldType} />
-				</CodeRow>
-			{/each}
+    <section class="code">
+      <Transition transition={(node) => fly(node, { y: 200, duration: 1200 })}>
+        <section class="code__block code_person">
+          <CodeRow tabs={0} {tabSize} number={1}>
+            <CodeKeyword>const</CodeKeyword>
+            Person = {"{"}
+          </CodeRow>
 
-			<CodeRow tabs={0} {tabSize} number={objectKeys.length + 2}>
-				{"}"}
-			</CodeRow>
-		</section>
-	</Transition>
+          {#each personObjectKeys as key, index}
+            <CodeRow tabs={1} {tabSize} number={index + 2}>
+              <KeyValue {key}>
+                <PropertyValueViewer
+                  {tabSize}
+                  propertyValueObject={personObject[key]}
+                />
+              </KeyValue>
+            </CodeRow>
+          {/each}
+
+          <CodeRow tabs={0} {tabSize} number={personObjectKeys.length + 2}>
+            {"}"}
+          </CodeRow>
+        </section>
+      </Transition>
+
+      <Transition
+        transition={(node) => fly(node, { y: 200, duration: 1200, delay: 200 })}
+      >
+        <section class="code__block code_skills">
+          <CodeRow tabs={0} {tabSize} number={1}>
+            <CodeKeyword>const</CodeKeyword>
+            Skills = {"{"}
+          </CodeRow>
+
+          {#snippet arrayItemRender(item: FieldType)}
+            <CodeRow tabs={1} {tabSize}>
+              <PropertyValueViewer {tabSize} propertyValueObject={item} />
+            </CodeRow>
+          {/snippet}
+
+          {#each skillsObjectKeys as key, index}
+            <CodeRow tabs={1} {tabSize} number={index + 2}>
+              <KeyValue {key} afterKeyContent={"["}>
+                <PropertyValueViewer
+                  {tabSize}
+                  {arrayItemRender}
+                  propertyValueObject={skillsObject[key]}
+                />
+              </KeyValue>
+            </CodeRow>
+          {/each}
+
+          <CodeRow tabs={0} {tabSize} number={personObjectKeys.length + 2}>
+            {"}"}
+          </CodeRow>
+        </section>
+      </Transition>
+    </section>
+  </section>
 </main>
 
+<footer class="footer"></footer>
+
 <style lang="scss">
-	.main {
-		height: 100%;
-		background-color: var(--code-bg);
+  .main {
+    height: 100%;
+    background-color: var(--code-bg);
 
-		display: grid;
-		place-content: center;
+    padding: 1rem;
+  }
 
-		padding: 1rem;
-	}
+  .title {
+    font-size: var(--h1-font-size);
+    color: var(--comment-color);
+    padding-top: 2rem;
+  }
 
-	.code {
-		color: var(--text-color);
-		font-size: 2.1rem;
-		line-height: 1.6;
-		font-family: "B612 Mono", monospace;
-	}
+  .code {
+    place-self: center;
 
-	@media (max-width: 900px) {
-		.code {
-			font-size: 1.5rem;
-		}
-	}
+    &__block {
+      color: var(--text-color);
+      font-size: 1.8rem;
+      line-height: 1.6;
+    }
 
-	@media (max-width: 640px) {
-		.code {
-			font-size: 1.2rem;
-		}
-	}
+    &_person {
+      margin-top: 5rem;
+    }
 
-	@media (max-width: 530px) {
-		.code {
-			font-size: 1rem;
-		}
-	}
+    &_skills {
+      margin-top: 5rem;
+    }
+  }
 
-	@media (max-width: 460px) {
-		.code {
-			font-size: 0.9rem;
-		}
-	}
+  .footer {
+    padding: 2rem;
+    background-color: var(--code-bg);
+  }
+
+  @media (max-width: 900px) {
+    .code__block {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .code__block {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .code__block {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .code__block {
+      font-size: 0.9rem;
+    }
+  }
 </style>

@@ -1,29 +1,16 @@
 <script lang="ts">
-	import type { FieldType } from "../shared/types/field";
-	import CodeAttr from "./code-attr.svelte";
-	import CodeLink from "./code-link.svelte";
-	import CodeNumber from "./code-number.svelte";
-	import CodeString from "./code-string.svelte";
+  import type { Component, Snippet } from "svelte";
+  import CodeAttr from "./code-attr.svelte";
 
-	interface Props {
-		key: string;
-		valueObject: FieldType;
-	}
+  interface Props {
+    key: string;
+    afterKeyContent?: string;
+    children: Snippet;
+  }
 
-	const { key, valueObject }: Props = $props();
+  const { key, afterKeyContent, children }: Props = $props();
 </script>
 
 <div class="key_value">
-	<CodeAttr>{key}</CodeAttr>:
-	{#if valueObject.type === "string"}
-		<CodeString style="word-break: keep-all;">"{valueObject.value}"</CodeString>
-	{:else if valueObject.type === "number"}
-		<CodeNumber>{valueObject.value}</CodeNumber>
-	{:else if valueObject.type === "link"}
-		<CodeString>
-			"<CodeLink href={valueObject.href} target="_blank">
-				{valueObject.value}
-			</CodeLink>"
-		</CodeString>
-	{/if},
+  <CodeAttr>{key}</CodeAttr>:{afterKeyContent}{@render children()}
 </div>

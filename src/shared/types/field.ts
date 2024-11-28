@@ -1,4 +1,4 @@
-export type FieldType = StringField | NumberField | LinkField;
+export type FieldType = StringField | NumberField | LinkField | ArrayField;
 
 type WithType<
 	Type extends string,
@@ -27,4 +27,11 @@ type LinkField = WithType<
 		value: string;
 		href: string;
 	}
+>;
+
+export type ArrayField = WithType<
+  "array",
+  {
+    value: FieldType[];
+  }
 >;

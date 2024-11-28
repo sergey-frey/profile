@@ -1,0 +1,17 @@
+@media (max-width: 900px) {
+  :root {
+    --h1-font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 650px) {
+  :root {
+    --h1-font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --h1-font-size: 1.1rem;
+  }
+}
