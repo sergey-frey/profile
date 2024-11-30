@@ -1,37 +1,41 @@
-export type FieldType = StringField | NumberField | LinkField | ArrayField;
+export type FieldValueType =
+  | StringFieldValue
+  | NumberFieldValue
+  | LinkFieldValue
+  | ArrayFieldValue;
 
 type WithType<
-	Type extends string,
-	P extends Record<string | symbol, unknown>
+  Type extends string,
+  P extends Record<string | symbol, unknown>,
 > = {
-	type: Type;
+  type: Type;
 } & P;
 
-type StringField = WithType<
-	"string",
-	{
-		value: string;
-	}
+type StringFieldValue = WithType<
+  "string",
+  {
+    value: string;
+  }
 >;
 
-type NumberField = WithType<
-	"number",
-	{
-		value: number;
-	}
+type NumberFieldValue = WithType<
+  "number",
+  {
+    value: number;
+  }
 >;
 
-type LinkField = WithType<
-	"link",
-	{
-		value: string;
-		href: string;
-	}
+type LinkFieldValue = WithType<
+  "link",
+  {
+    value: string;
+    href: string;
+  }
 >;
 
-export type ArrayField = WithType<
+export type ArrayFieldValue = WithType<
   "array",
   {
-    value: FieldType[];
+    value: FieldValueType[];
   }
 >;
