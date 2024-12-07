@@ -6,7 +6,6 @@ type PersonObjectFields =
   | "experienceYears"
   | "github"
   | "telegram"
-  | "email"
   | "hh";
 
 export const personObject: Record<PersonObjectFields, FieldValueType> = {
@@ -31,11 +30,6 @@ export const personObject: Record<PersonObjectFields, FieldValueType> = {
     type: "link",
     value: "@sergeyfrey",
     href: "https://t.me/sergeyfrey",
-  },
-  email: {
-    type: "link",
-    value: "sergey.frey.work@gmail.com",
-    href: "mailto:sergey.frey.work@gmail.com",
   },
   hh: {
     type: "link",

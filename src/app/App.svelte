@@ -5,6 +5,7 @@
 	import PersonCodeBlock from "../components/person-code-block.svelte";
 	import SkillsCodeBlock from "../components/skills-code-block.svelte";
 	import Transition from "../shared/ui/transition.svelte";
+	import Footer from "../components/footer.svelte";
 
 	const isSmallScreen = window.matchMedia("(max-width: 500px)").matches;
 
@@ -35,13 +36,11 @@
 	</section>
 </main>
 
-<footer class="footer"></footer>
+<Footer />
 
 <style lang="scss">
 	.main {
 		height: 100%;
-		background-color: var(--code-bg);
-
 		padding: 1rem;
 	}
 
@@ -49,10 +48,5 @@
 		font-size: var(--h1-font-size);
 		color: var(--comment-color);
 		padding-top: 2rem;
-	}
-
-	.footer {
-		padding: 2rem;
-		background-color: var(--code-bg);
 	}
 </style>

@@ -4,17 +4,13 @@
   &__block {
     color: var(--text-color);
     font-size: 1.8rem;
-    line-height: 1.6;
+    line-height: 1.7;
+
+    padding-top: 5rem;
 
     &__title {
       display: inline-block;
     }
-  }
-
-  &_person,
-  &_skills,
-  &_export {
-    margin-top: 5rem;
   }
 }
 

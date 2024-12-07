@@ -14,17 +14,20 @@
   --comment-color: #5c6370;
 
   --h1-font-size: 2rem;
+  --h3-font-size: 1.2rem;
 }
 
 body,
 html,
 #root {
   min-height: 100dvh;
+
+  background-color: var(--code-bg);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  overflow-x: hidden;
 }
 
 body {
@@ -48,7 +51,4 @@ a {
 .container {
   margin: 0 auto;
   max-width: 1200px;
-}
-
-@media (max-width: 1px) {
 }

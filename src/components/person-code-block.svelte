@@ -27,10 +27,10 @@
 			delay: 200,
 		})}
 >
-	<section class="code__block code_person">
+	<section class="code__block code_person" id="person-block">
 		<CodeRow tabs={0} {tabSize} number={1}>
 			<CodeKeyword>const</CodeKeyword>
-			<h3 class="code__block__title" id="person-block">Person</h3>
+			<h3 class="code__block__title">Person</h3>
 			= {"{"}
 		</CodeRow>
 

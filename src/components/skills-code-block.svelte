@@ -28,10 +28,10 @@
 			delay: 400,
 		})}
 >
-	<section class="code__block code_skills">
+	<section class="code__block code_skills" id="skills-block">
 		<CodeRow tabs={0} {tabSize} number={1}>
 			<CodeKeyword>const</CodeKeyword>
-			<h3 class="code__block__title" id="skills-block">Skills</h3>
+			<h3 class="code__block__title">Skills</h3>
 			= {"{"}
 		</CodeRow>
 
