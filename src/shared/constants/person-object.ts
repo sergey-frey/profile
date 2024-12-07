@@ -5,7 +5,9 @@ type PersonObjectFields =
   | "lastName"
   | "experienceYears"
   | "github"
-  | "telegram";
+  | "telegram"
+  | "email"
+  | "hh";
 
 export const personObject: Record<PersonObjectFields, FieldValueType> = {
   firstName: {
@@ -29,5 +31,15 @@ export const personObject: Record<PersonObjectFields, FieldValueType> = {
     type: "link",
     value: "@sergeyfrey",
     href: "https://t.me/sergeyfrey",
+  },
+  email: {
+    type: "link",
+    value: "sergey.frey.work@gmail.com",
+    href: "mailto:sergey.frey.work@gmail.com",
+  },
+  hh: {
+    type: "link",
+    value: "Frontend developer",
+    href: "https://novgorod.hh.ru/resume/e5159c17ff0bda4ec10039ed1f4e5643505946",
   },
 };

@@ -4,12 +4,14 @@
 	import CodeLink from "../shared/ui/code-link.svelte";
 	import CodeRow from "../shared/ui/code-row.svelte";
 	import Transition from "../shared/ui/transition.svelte";
+	import { getContext } from "svelte";
+	import { ContextKeys } from "../shared/constants/context-keys";
 
-	interface Props {
-		tabSize: number;
+	const tabSize = getContext(ContextKeys.tabSize) as number | undefined;
+
+	if (tabSize === undefined) {
+		throw new Error("CodeBlock Error: tabSize is undefined");
 	}
-
-	const { tabSize }: Props = $props();
 </script>
 
 <Transition

@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { getContext } from "svelte";
 	import { fly } from "svelte/transition";
+	import { ContextKeys } from "../shared/constants/context-keys";
 	import { skillsObject } from "../shared/constants/skills-object";
 	import type { FieldValueType } from "../shared/types/field";
 	import CodeKeyword from "../shared/ui/code-keyword.svelte";
@@ -9,11 +11,11 @@
 	import Transition from "../shared/ui/transition.svelte";
 	import { keys } from "../shared/utils/keys";
 
-	interface Props {
-		tabSize: number;
-	}
+	const tabSize = getContext(ContextKeys.tabSize) as number | undefined;
 
-	const { tabSize }: Props = $props();
+	if (tabSize === undefined) {
+		throw new Error("CodeBlock Error: tabSize is undefined");
+	}
 
 	const skillsObjectKeys = keys(skillsObject);
 </script>

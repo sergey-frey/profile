@@ -1,20 +1,16 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import ExportCodeBlock from "../components/export-code-block.svelte";
 	import PersonCodeBlock from "../components/person-code-block.svelte";
 	import SkillsCodeBlock from "../components/skills-code-block.svelte";
 	import Transition from "../shared/ui/transition.svelte";
 
-	let tabSize = $state(50);
+	const isSmallScreen = window.matchMedia("(max-width: 500px)").matches;
 
-	onMount(() => {
-		const isSmallScreen = window.matchMedia("(max-width: 500px)").matches;
+	const tabSize = isSmallScreen ? 20 : 50;
 
-		if (isSmallScreen) {
-			tabSize = 20;
-		}
-	});
+	setContext("tab-size", tabSize);
 </script>
 
 <main class="main">
@@ -30,11 +26,11 @@
 		</Transition>
 
 		<section class="code">
-			<PersonCodeBlock {tabSize} />
+			<PersonCodeBlock />
 
-			<SkillsCodeBlock {tabSize} />
+			<SkillsCodeBlock />
 
-			<ExportCodeBlock {tabSize} />
+			<ExportCodeBlock />
 		</section>
 	</section>
 </main>
